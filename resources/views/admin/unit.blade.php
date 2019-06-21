@@ -33,6 +33,18 @@
                   <div class="col-md">
                     <input type="text" class="form-control" placeholder="Unit Name" name="name">
                   </div>
+                  <div class="row">
+                    <div class="col">
+                   <select name="course_id" class="form-control " required>
+                       @foreach ($courses as $course)
+                       <option value="{{$course->id}}">
+                            {{$course->C_name}}
+                        </option>
+                       @endforeach
+                     
+                   </select>
+                    </div>
+                </div>
                   <div class="col-md">
                   <button type="submit" class="btn btn-primary">Add</button>
                   </div>
@@ -64,16 +76,16 @@
             
                 @foreach ($units as $unit)
                 <td>
-                    {{$unit->id}}
+                    {{$unit->UN_id}}
                     </td>
                     <td>
-                        {{$unit->name}}
+                        {{$unit->U_name}}
                         </td>
                         <td>
-                          <a href="/edit/unit/{{$unit->id}}"> <button  type="button" class="btn btn-primary">Edit</button></a>
+                          <a href="/edit/unit/{{$unit->UN_id}}"> <button  type="button" class="btn btn-primary">Edit</button></a>
                         </td>
                         <td>
-                        <a href="/admin/remove/unit/{{$unit->id}}"> <button  type="button" class="btn btn-danger">Remove</button></a>
+                        <a href="/admin/remove/unit/{{$unit->UN_id}}"> <button  type="button" class="btn btn-danger">Remove</button></a>
                           </td>
                         <tr>   
                 @endforeach

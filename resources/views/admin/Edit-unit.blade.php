@@ -1,7 +1,7 @@
 @extends('admin.admin-panel')
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-<h1 class="h3 mb-0 text-gray-800">Unit : {{$unit->name}}</h1>
+<h1 class="h3 mb-0 text-gray-800">Unit : {{$unit->U_name}}</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
       </div>
       @if(Session::has('success-message'))
@@ -42,10 +42,10 @@
                 </tfoot>
                 <tbody>
                     <td>
-                        {{$unit->id}}
+                        {{$unit->UN_id}}
                     </td>
                     <td>
-                        {{$unit->name}}
+                        {{$unit->U_name}}
                     </td>
                 </tbody>
               </table>
@@ -55,7 +55,7 @@
                     @csrf
                         <div class="row">
                           <div class="col-md">
-                          <input type="text" class="form-control" placeholder="Unit Name" name="name" value="{{$unit->name}}">
+                          <input type="text" class="form-control" placeholder="Unit Name" name="name" value="{{$unit->U_name}}">
                           </div>
                           <div class="col-md">
                           <button type="submit" class="btn btn-primary">Edit</button>

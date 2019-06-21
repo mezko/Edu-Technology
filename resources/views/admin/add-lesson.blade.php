@@ -27,46 +27,49 @@
     
         
 @endif
-    <form method="POST">
+
+    <form method="POST" enctype="multipart/form-data">
         @csrf
-            <div class="row">
-              <div class="col-md">
-                <input type="text" class="form-control" placeholder="Unit Name" name="name">
-              </div>
-            </div>
-            <br>
-              <div class="row">
-                <div class="col-md">
-                  <input type="file" class="form-control" placeholder="upload Pic" name="pic">
-                </div>
-              </div>
-              <br>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="First name" name="name" required>
+          </div>
+    
+          
+              
                 <div class="row">
-                    <div class="col-md">
-                      <input type="text" class="form-control" placeholder="Add Video URL" name="video">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Add Video URL" name="video" required>
                     </div>
-                </div>
-                <br>
+                
                     <div class="row">
-                        <div class="col-md">
-                       <select name="unit_id" class="form-control form-control-sm">
-                           @foreach ($units as $unit)
-                           <option value="{{$unit->id}}">
-                                {{$unit->name}}
+                        <div class="col">
+                       <select name="unit_id" class="form-control " required>
+                           @foreach ($allunit as $unit)
+                           <option value="{{$unit->UN_id}}">
+                                {{$unit->U_name}}
                             </option>
                            @endforeach
                          
                        </select>
                         </div>
                     </div>
-                    <br>
-              <div class="col-md">
+                    
+                    <div class="row">
+                      <div class="col">
+                        <input type="file" name="pic" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
               <button type="submit" class="btn btn-primary">Add</button>
-              </div>
-            </div>
+            
+          
           </form>
+       
 
-</div>
+
 <h1> All Lesson</h1>
 <div class="card-body">
     <div class="table-responsive">
@@ -75,6 +78,9 @@
           <tr>
             <th>Number</th>
             <th>Name</th>
+            <th>Pic</th>
+            <th>video</th>
+            <th>unit</th>
             <th>Edit</th>
             <th>Remove</th>
           </tr>
@@ -83,6 +89,9 @@
           <tr>
             <th>Number</th>
             <th>Name</th>
+            <th>Pic</th>
+            <th>video</th>
+            <th>unit</th>
             <th>Edit</th>
             <th>Remove</th>
           </tr>
@@ -91,16 +100,25 @@
         
             @foreach ($units as $unit)
             <td>
-                {{$unit->id}}
+                {{$unit->L_id}}
                 </td>
                 <td>
-                    {{$unit->name}}
+                    {{$unit->U_name}}
                     </td>
                     <td>
-                      <a href="/edit/unit/{{$unit->id}}"> <button  type="button" class="btn btn-primary">Edit</button></a>
+                    <img src="{{asset('uploads/'.$unit->pic)}}" style="width:50px ; lenght:50px;">
+                      </td>
+                      <td>
+                        {{$unit->video}}
+                        </td>
+                        <td>
+                          {{$unit->U_name}}
+                          </td>
+                    <td>
+                      <a href="/edit/lesson/{{$unit->L_id}}"> <button  type="button" class="btn btn-primary">Edit</button></a>
                     </td>
                     <td>
-                    <a href="/admin/remove/unit/{{$unit->id}}"> <button  type="button" class="btn btn-danger">Remove</button></a>
+                    <a href="/remove/lesson/{{$unit->L_id}}"> <button  type="button" class="btn btn-danger">Remove</button></a>
                       </td>
                     <tr>   
             @endforeach

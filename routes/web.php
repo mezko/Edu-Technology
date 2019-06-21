@@ -47,6 +47,12 @@ Route::post('admin/register','AdminController@Register');
 /************************************************************************************** */
 //admin panel
 Route::get('admin/home','AdminController@homepage')->name('admin/home')->middleware('AdminAuth');
+/////////////////////////////////////course Teachers/////////////////////////////////////////////////////
+Route::get('admin/courses','AdminController@courses_page')->middleware('AdminAuth');
+Route::post('admin/courses','AdminController@addcourse')->middleware('AdminAuth');
+
+
+/////////////////////////////////////units sections//////////////////////////////////////////////////////
 //units
 Route::get('admin/units','AdminController@unitpage')->middleware('AdminAuth');
 //add unit
@@ -61,4 +67,46 @@ Route::post('edit/unit/{id}','AdminController@editunit')->middleware('AdminAuth'
 /////////////////////////////////////////////////lessons//////////////////////////////////////////////
 //show-lessons-page
 Route::get('admin/lesson','AdminController@show_lesson_page')->middleware('AdminAuth');
+//add-lesson
+Route::post('admin/lesson','AdminController@add_lessons')->middleware('AdminAuth');
+//remove lesson
+Route::get('remove/lesson/{id}','AdminController@remove_lesson')->middleware('AdminAuth');
+///////////////edit lesson
+//show edit page
+Route::get('edit/lesson/{id}','AdminController@edit_lesson_page')->middleware('AdminAuth');
+Route::post('edit/lesson/{id}','AdminController@editlesson');
+/////////////////////////Teacher///////////////////////////////
+///show teacher page 
+Route::get('/admin/teacher','AdminController@allteachers')->middleware('AdminAuth');
+Route::post('/admin/teacher','AdminController@add_teacher')->middleware('AdminAuth');
+//delete teacher
+Route::get('/admin/teacher/delete/{id}','AdminController@delete_teacher');
+//edit teacher
+Route::get('/admin/edit/teacher/{id}','AdminController@show_edit_teacher')->middleware('AdminAuth');
+Route::post('/admin/edit/teacher/{id}','AdminController@edit_teacher')->middleware('AdminAuth');
+/////////////////////////end Teachers
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************************************************
+ ///////////////////////////////////end admin panel /////////////////////////////////////////////////////////
+ ///////////////////////////////////start user panel/////////////////////////////////////////////////////////
+ ***********************************************************************************************************/
+//////show course page 
+Route::get('/course/page/{id}','HomeController@show_course_page' );
+///////////////////////course video
+Route::get('/course/video/{id}','HomeController@course_video' );
+Route::post('/course/video/{id}','HomeController@comment_or_question' );
+///////////////////////////////////////////////////////end user div///////////////////////////////////////////
+///////////////////////start teachers ////////////////////////////////////////////////////////////////
+/////////////////////show teacht panel//////////////////////////
+Route::get('teacher_panel','AdminController@teacher_page' )->middleware('AdminAuth');
+////////////////replycomment
+Route::get('reply/{id}','AdminController@replypage' )->middleware('AdminAuth');
+Route::post('reply/{id}','AdminController@reply' )->middleware('AdminAuth');
+/////////////////answer question
+//////////all question
+Route::get('questions','AdminController@questions_page' )->middleware('AdminAuth');
+Route::get('answer/{id}','AdminController@answerpage' )->middleware('AdminAuth');
+Route::post('answer/{id}','AdminController@answerquestion' )->middleware('AdminAuth');
+
+
 
