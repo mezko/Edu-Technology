@@ -10,7 +10,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class addunit implements ShouldBroadcast
+class notif  implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,13 +19,12 @@ class addunit implements ShouldBroadcast
      *
      * @return void
      */
-  public  $name="You have notifaction";
+    public  $text;
     public function __construct($text)
     {
        $this->text=$text;
         return '.$text';
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
@@ -33,6 +32,10 @@ class addunit implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('addunit');
+        return new Channel('notif');
+    }
+    public function broadcastAs()
+    {
+       return "mynoti";
     }
 }

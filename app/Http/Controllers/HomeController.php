@@ -9,6 +9,7 @@ use App\comment;
 use App\question;
 use App\lesson;
 use Illuminate\Database\Eloquent\Builder;
+use App\Events\teachernoti;
 class HomeController extends Controller
 {
     /**
@@ -65,14 +66,45 @@ class HomeController extends Controller
         $question->user_id=Auth::user()->id;
         $question->lesson_id=$id;
         $question->save();
+        event(new teachernoti("You Have new comment"));
         return back()->with('success-message', 'Question sent ,the answer will answer soon');
         } elseif ($request->com_hid=="comment") {
             $comment->comment=$request->comment;
             $comment->user_id=Auth::user()->id;
             $comment->lesson_id=$id;
             $comment->save();
+            event(new teachernoti("You Have New Question"));
             return back()->with('success-message', 'Comment sent');
         }
         
     }
+    /////////////////search for course
+    public function search(request $request)
+    {
+    // dd($request->text);
+     $courses=DB::table('courses')->Where('C_name','like', '%' .$request->text. '%')->get();
+     return view('student.search')->with('courses',$courses);
+    
+    }
+    /////////////////show_my_comment
+    public function show_my_comment($id)
+    {
+        $comments=DB::table('comments')->join('answers','comments.co_id','answers.comment_id')
+        ->join('lessons','lessons.L_id','comments.lesson_id')
+           ->join('units','units.UN_id','lessons.unit_id')->join('courses','courses.id','units.course_id')
+        ->where('comments.user_id',Auth::user()->id)->get();
+        // dd($comments);
+        return view('student.mycomment')->with('comments',$comments);
+    }
+    ///////////////////////////show_my_question
+    public function show_my_question($id)
+    {
+        $questions=DB::table('questions')->join('answers','questions.Q_id','answers.question_id')
+        ->join('lessons','lessons.L_id','questions.lesson_id')
+           ->join('units','units.UN_id','lessons.unit_id')->join('courses','courses.id','units.course_id')
+        ->where('questions.user_id',Auth::user()->id)->get();
+        // dd($comments);
+        return view('student.myquestion')->with('questions',$questions);
+    }
+
 }

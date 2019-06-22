@@ -280,6 +280,24 @@
   $('div.alert').delay(5000).slideUp(300);
 
   </script>
+   <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
+   <script>
+ 
+     // Enable pusher logging - don't include this in production
+     Pusher.logToConsole = true;
+ 
+     var pusher = new Pusher('11dd1afd9c42783888a3', {
+       cluster: 'mt1',
+       forceTLS: true
+     });
+ 
+     var channel = pusher.subscribe('teachernoti');
+     channel.bind('Teacher_Notify', function(data) {
+       alert(JSON.stringify(data));
+     // this->data=data->text;
+ 
+     });
+   </script>
 </body>
 
 </html>

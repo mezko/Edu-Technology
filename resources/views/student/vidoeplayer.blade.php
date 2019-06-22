@@ -44,5 +44,15 @@ style="width:1200px;height: 300px">
 
   @endif
 @endforeach
-
+{{-- <script src="{{ asset('js/bootstrap.js') }}" defer></script>
+<script>
+  // Echo.channel('my-channel')
+  //   .listen('my-event', (e) => {
+  //       console.log(e);
+  //   });
+  window.Echo.channel('my-channel')
+    .listen('my-event', (e) => {
+        console.log(e);
+    });
+  </script> --}}
 @endsection

@@ -13,6 +13,7 @@ use Auth;
 use Hash;
 use DB;
 use App\Events\addunit;
+use App\Events\notif;
 
 
 class AdminController extends Controller
@@ -293,6 +294,7 @@ public function addcourse(Request $request)
         $reply->user_id=$request->user_id;
         $reply->save();
         $comment =DB::table('comments')->where('co_id',$id)->update(['status' => '1']);
+        event(new notif("Your comment Replaied"));
         return redirect('/teacher_panel')->with('success-message', 'Reply done');
        }
        //////////////////answer page 
@@ -326,6 +328,7 @@ public function addcourse(Request $request)
         $answer->user_id=$request->user_id;
         $answer->save();
         $comment =DB::table('questions')->where('Q_id',$id)->update(['status' => '1']);
+        event(new notif("Your Question Answered"));
         return redirect('/questions')->with('success-message', 'Reply done');
            
        }

@@ -19,7 +19,7 @@ Auth::routes();
 Route::get('mylogin',function(){
     return view('mylogin');
 });
-Route::get('/home', 'HomeController@index')->name('home');
+
 //gmail_login
 Route::get('/gmail_redirect', 'SocialAuthGoogleController@redirect');
 Route::get('/gamil_callback', 'SocialAuthGoogleController@callback');
@@ -95,6 +95,17 @@ Route::get('/course/page/{id}','HomeController@show_course_page' );
 ///////////////////////course video
 Route::get('/course/video/{id}','HomeController@course_video' );
 Route::post('/course/video/{id}','HomeController@comment_or_question' );
+/////////
+Route::get('/home', 'HomeController@index')->name('home');
+
+/////////////////search
+Route::post('/search', 'HomeController@search');
+//////////comment of users 
+Route::get('/mycomment/{id}', 'HomeController@show_my_comment');
+//////////////questions and answer of users
+Route::get('/myquestion/{id}', 'HomeController@show_my_question');
+
+
 ///////////////////////////////////////////////////////end user div///////////////////////////////////////////
 ///////////////////////start teachers ////////////////////////////////////////////////////////////////
 /////////////////////show teacht panel//////////////////////////
@@ -107,6 +118,12 @@ Route::post('reply/{id}','AdminController@reply' )->middleware('AdminAuth');
 Route::get('questions','AdminController@questions_page' )->middleware('AdminAuth');
 Route::get('answer/{id}','AdminController@answerpage' )->middleware('AdminAuth');
 Route::post('answer/{id}','AdminController@answerquestion' )->middleware('AdminAuth');
+//////////////////////////////test push
+Route::get('test', function () {
+    return view('push');
+    
+});
+
 
 
 
