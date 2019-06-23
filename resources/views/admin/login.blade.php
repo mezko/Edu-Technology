@@ -40,6 +40,17 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
+                  @if (Session::has('delete-message'))
+                  <div class="alert alert-danger"> 
+                      <button type="button" 
+                          class="close" 
+                          data-dismiss="alert" 
+                          aria-hidden="true">&times;</button>
+                      {!! session()->get('delete-message') !!} 
+                  </div> 
+                      
+                          
+                  @endif
                   <form method="POST" >
                     <div >
                       

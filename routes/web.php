@@ -50,6 +50,8 @@ Route::get('admin/home','AdminController@homepage')->name('admin/home')->middlew
 /////////////////////////////////////course Teachers/////////////////////////////////////////////////////
 Route::get('admin/courses','AdminController@courses_page')->middleware('AdminAuth');
 Route::post('admin/courses','AdminController@addcourse')->middleware('AdminAuth');
+//////////////////////////////////delete_course
+Route::get('delete/course/{id}','AdminController@delete_course')->middleware('AdminAuth');
 
 
 /////////////////////////////////////units sections//////////////////////////////////////////////////////
@@ -123,6 +125,9 @@ Route::get('test', function () {
     return view('push');
     
 });
+/////////admin logout
+Route::get('admin/logout', 'AdminController@logout');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
 

@@ -18,7 +18,7 @@ class AdminAuth
       
         if(!Auth::guard('admin')->check()){ 
            
-            return  redirect('admin/login');
+            return  redirect('admin/login')->with('delete-message', 'course Removed');
         }
        
         return $next($request);

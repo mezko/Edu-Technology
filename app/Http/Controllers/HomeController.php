@@ -89,7 +89,7 @@ class HomeController extends Controller
     /////////////////show_my_comment
     public function show_my_comment($id)
     {
-        $comments=DB::table('comments')->join('answers','comments.co_id','answers.comment_id')
+        $comments=DB::table('comments')->join('replies','comments.co_id','replies.comment_id')
         ->join('lessons','lessons.L_id','comments.lesson_id')
            ->join('units','units.UN_id','lessons.unit_id')->join('courses','courses.id','units.course_id')
         ->where('comments.user_id',Auth::user()->id)->get();

@@ -96,7 +96,7 @@
                       <a href="/edit/lesson/{{$course->id}}"> <button  type="button" class="btn btn-primary">Edit</button></a>
                     </td>
                     <td>
-                    <a href="/remove/lesson/{{$course->id}}"> <button  type="button" class="btn btn-danger">Remove</button></a>
+                    <a href="/delete/course/{{$course->id}}"> <button  type="button" class="btn btn-danger">Remove</button></a>
                       </td>
                     <tr>   
             @endforeach

@@ -30,6 +30,8 @@ class AdminController extends Controller
     public function login(Request $request){
     if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember')))
     {
+        
+    
          if(Auth::guard('admin')->user()->permission==2)
          {
             return redirect()->intended('teacher_panel');
@@ -94,6 +96,11 @@ public function addcourse(Request $request)
     //save to DB
     $course->save();
     return back()->with('success-message', 'Unit Added');
+}
+public function delete_course($id)
+{
+    course::find($id)->delete();
+    return back()->with('delete-message', 'course Removed');
 }
 
     
@@ -331,6 +338,13 @@ public function addcourse(Request $request)
         event(new notif("Your Question Answered"));
         return redirect('/questions')->with('success-message', 'Reply done');
            
+       }
+       //logout
+       public function logout()
+       {
+        Auth::guard('admin')->logout();
+       
+        return redirect('/admin/login');
        }
 
 }
